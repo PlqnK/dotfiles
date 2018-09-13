@@ -1,4 +1,8 @@
 URxvt.font: xft:Inconsolata:size=12
+URxvt.scrollBar: false
+URxvt.urgentOnBell: true
+URxvt.cursorBlink: true
+URxvt.url-launcher: /usr/bin/firefox
 
 ! Base16 Default Dark
 ! Scheme: Chris Kempson (http://chriskempson.com)
