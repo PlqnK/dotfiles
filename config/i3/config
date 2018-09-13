@@ -188,3 +188,6 @@ bar {
 
 # Apply Nvidia config
 exec --no-startup-id "nvidia-settings --load-config-only"
+
+# Launch compton at startup
+exec --no-startup-id compton --config ~/.config/compton/compton.conf
