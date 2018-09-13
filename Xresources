@@ -1,3 +1,5 @@
+URxvt.font: xft:Inconsolata:size=12
+
 ! Base16 Default Dark
 ! Scheme: Chris Kempson (http://chriskempson.com)
 
