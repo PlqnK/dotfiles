@@ -159,16 +159,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym semicolon resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -207,8 +207,9 @@ exec --no-startup-id compton --config ~/.config/compton/compton.conf
 # Set a simple wallpaper
 exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/Aenami/"Any Minute Now.jpg"
 
-# Restore the workspace 1 layout
+# Restore the workspaces layout
 exec --no-startup-id i3-msg workspace $ws1\; append_layout ~/.config/i3/workspace-1.json
+exec --no-startup-id i3-msg workspace $ws5\; append_layout ~/.config/i3/workspace-5.json
 
 # Launch background programs on startup
 exec dropbox
