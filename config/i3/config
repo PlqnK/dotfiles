@@ -186,6 +186,9 @@ bar {
         status_command i3status
 }
 
+# Set a simple wallpaper
+exec feh --bg-scale ~/Pictures/Wallpapers/Aenami/"Any Minute Now.jpg"
+
 # Load Nivida config and start the X compositor
 exec --no-startup-id "nvidia-settings --load-config-only"
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
