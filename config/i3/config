@@ -186,12 +186,13 @@ bar {
         status_command i3status
 }
 
+# Set the monitors layout, load Nivida config and start the X compositor
+exec --no-startup-id xrandr --output DVI-D-0 --off --output HDMI-1 --off --output HDMI-0 --off --output DP-3 --off --output DP-2 --primary --mode 1920x1080 --rate 144 --pos 0x0 --rotate normal --output DP-1 --off --output DP-0 --off
+exec --no-startup-id nvidia-settings --load-config-only
+exec --no-startup-id compton --config ~/.config/compton/compton.conf
+
 # Set a simple wallpaper
 exec feh --bg-scale ~/Pictures/Wallpapers/Aenami/"Any Minute Now.jpg"
-
-# Load Nivida config and start the X compositor
-exec --no-startup-id "nvidia-settings --load-config-only"
-exec --no-startup-id compton --config ~/.config/compton/compton.conf
 
 # Launch programs on startup
 exec dropbox
