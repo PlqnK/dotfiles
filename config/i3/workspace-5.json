@@ -34,7 +34,6 @@
        {
        "class": "^discord$",
        "title": "^Discord$"
-       // "window_role": "^browser\\-window$"
        }
     ],
     "type": "con"
