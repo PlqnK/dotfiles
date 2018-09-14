@@ -186,8 +186,11 @@ bar {
         status_command i3status
 }
 
-# Apply Nvidia config
+# Load Nivida config and start the X compositor
 exec --no-startup-id "nvidia-settings --load-config-only"
-
-# Launch compton at startup
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
+
+# Launch programs on startup
+exec dropbox
+exec syncthing-gtk --minimized
+
