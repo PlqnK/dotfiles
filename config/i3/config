@@ -208,7 +208,7 @@ exec --no-startup-id compton --config ~/.config/compton/compton.conf
 exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/Aenami/"Any Minute Now.jpg"
 
 # Restore the workspace 1 layout
-exec --no-startup-id "i3-msg 'workspace $ws1; append_layout ~/.config/i3/workspace-1.json'"
+exec --no-startup-id i3-msg workspace $ws1\; append_layout ~/.config/i3/workspace-1.json
 
 # Launch background programs on startup
 exec dropbox
@@ -218,10 +218,6 @@ exec syncthing-gtk --minimized
 exec firefox
 exec keepassxc
 exec urxvt
-exec code
-exec thunar
 exec telegram-desktop
-exec Discord
+exec discord
 exec thunderbird
-exec spotify
-

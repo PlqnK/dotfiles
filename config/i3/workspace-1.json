@@ -38,8 +38,7 @@
             "percent": 0.5,
             "swallows": [
                {
-               "class": "^keepassxc$",
-               "title": "^personalPasswords\\ \\-\\ KeePassXC$"
+               "class": "^keepassxc$"
                }
             ],
             "type": "con"
