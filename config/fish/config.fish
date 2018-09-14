@@ -1,3 +1,5 @@
-abbr ga 'git add -A'
-abbr gc 'git commit -m'
-abbr gca 'git commit -am'
+abbr gita 'git add -A'
+abbr gitc 'git commit -m'
+abbr gitca 'git commit -am'
+abbr gitst 'git status -s'
+abbr gitl 'git log --pretty=oneline'
