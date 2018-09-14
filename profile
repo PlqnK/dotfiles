@@ -1,7 +1,7 @@
 #!/bin/sh
 
 export EDITOR="vim"
-export TERMINAL="rxvt-unicode"
+export TERM="urxvt"
 export BROWSER="firefox"
 
 # Needed for KeePassXC SSH Agent
