@@ -179,13 +179,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Pulse Audio media controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% # Increase volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% # Decrease volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2% # Increase volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2% # Decrease volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # Mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # Increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # Decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # Increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # Decrease screen brightness
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
