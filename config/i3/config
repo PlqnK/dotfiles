@@ -167,7 +167,7 @@ exec --no-startup-id nvidia-settings --load-config-only
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
 
 # Set a simple wallpaper
-exec_always --no-startup-id nitrogen --no-recurse --random --set-zoom-fill ~/Pictures/Wallpapers/Aenami/
+exec_always --no-startup-id nitrogen --no-recurse --random --set-zoom-fill ~/Pictures/Wallpapers/Simon Stålenhag/
 
 # Restore the workspaces layout
 exec --no-startup-id i3-msg workspace $ws1\; append_layout ~/.config/i3/workspace-1.json
