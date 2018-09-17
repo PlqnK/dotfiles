@@ -111,7 +111,7 @@ assign [class="Code"] $ws3
 assign [class="Thunar"] $ws4
 assign [class="TelegramDesktop"] $ws5
 assign [class="discord"] $ws5
-assign [class="Thunderbird"] $ws6
+assign [class="Evolution"] $ws6
 for_window [class="Spotify"] move to workspace $ws7 # assign doesn't work with Spotify
 assign [class="Steam"] $ws8
 assign [class="Chromium"] $ws10
@@ -183,4 +183,4 @@ exec keepassxc
 exec urxvt
 exec telegram-desktop
 exec discord
-exec thunderbird
+exec evolution
