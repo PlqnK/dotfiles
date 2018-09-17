@@ -174,13 +174,13 @@ exec --no-startup-id i3-msg workspace $ws1\; append_layout ~/.config/i3/workspac
 exec --no-startup-id i3-msg workspace $ws5\; append_layout ~/.config/i3/workspace-5.json
 
 # Launch background programs on startup
-exec dropbox
-exec syncthing-gtk --minimized
+exec --no-startup-id dropbox
+exec --no-startup-id syncthing-gtk --minimized
 
 # Launch other programs on startup
-exec firefox
-exec keepassxc
-exec urxvt
-exec telegram-desktop
-exec discord
-exec evolution
+exec --no-startup-id firefox
+exec --no-startup-id keepassxc
+exec --no-startup-id urxvt
+exec --no-startup-id telegram-desktop
+exec --no-startup-id discord
+exec --no-startup-id evolution
