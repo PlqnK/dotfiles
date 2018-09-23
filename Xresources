@@ -4,48 +4,47 @@ URxvt.urgentOnBell: true
 URxvt.cursorBlink: true
 URxvt.url-launcher: /usr/bin/firefox
 
-! Base16 Default Dark
-! Scheme: Chris Kempson (http://chriskempson.com)
-
-#define base00 #181818
-#define base01 #282828
-#define base02 #383838
-#define base03 #585858
-#define base04 #b8b8b8
-#define base05 #d8d8d8
-#define base06 #e8e8e8
-#define base07 #f8f8f8
-#define base08 #ab4642
-#define base09 #dc9656
-#define base0A #f7ca88
-#define base0B #a1b56c
-#define base0C #86c1b9
-#define base0D #7cafc2
-#define base0E #ba8baf
-#define base0F #a16946
-
-*foreground:   base05
-#ifdef background_opacity
-*background:   [background_opacity]base00
-#else
-*background:   base00
-#endif
-*cursorColor:  base05
-
-*color0:       base00
-*color1:       base08
-*color2:       base0B
-*color3:       base0A
-*color4:       base0D
-*color5:       base0E
-*color6:       base0C
-*color7:       base05
-
-*color8:       base03
-*color9:       base09
-*color10:      base01
-*color11:      base02
-*color12:      base04
-*color13:      base06
-*color14:      base0F
-*color15:      base07
+!
+! Generated with :
+! XRDB2Xreources.py
+!
+*.foreground:  #e6e1cf
+*.background:  #0f1419
+*.cursorColor: #f29718
+!
+! Black
+*.color0:      #000000
+*.color8:      #323232
+!
+! Red
+*.color1:      #ff3333
+*.color9:      #ff6565
+!
+! Green
+*.color2:      #b8cc52
+*.color10:     #eafe84
+!
+! Yellow
+*.color3:      #e7c547
+*.color11:     #fff779
+!
+! Blue
+*.color4:      #36a3d9
+*.color12:     #68d5ff
+!
+! Magenta
+*.color5:      #f07178
+*.color13:     #ffa3aa
+!
+! Cyan
+*.color6:      #95e6cb
+*.color14:     #c7fffd
+!
+! White
+*.color7:      #ffffff
+*.color15:     #ffffff
+!
+! Bold, Italic, Underline
+*.colorBD:     #e6e1cf
+!*.colorIT:
+!*.colorUL:
