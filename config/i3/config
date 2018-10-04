@@ -170,6 +170,7 @@ exec --no-startup-id i3-msg workspace $ws5\; append_layout ~/.config/i3/workspac
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id dropbox
 exec --no-startup-id syncthing-gtk --minimized
+exec --no-startup-id kdeconnect-indicator
 
 # Launch other programs on startup
 exec --no-startup-id firefox
