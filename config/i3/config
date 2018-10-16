@@ -159,6 +159,9 @@ exec --no-startup-id xrandr --output DVI-D-0 --off --output HDMI-1 --off --outpu
 exec --no-startup-id nvidia-settings --load-config-only
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
 
+# Start libinput-gestures
+exec --no-startup-id libinput-gestures
+
 # Set a simple wallpaper
 exec_always --no-startup-id nitrogen --no-recurse --random --set-zoom-fill ~/Pictures/Wallpapers/Simon Stålenhag/
 
