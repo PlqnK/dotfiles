@@ -1,7 +1,8 @@
 Vagrant.configure("2") do |config|
   config.vm.provider :libvirt do |libvirt|
     libvirt.cpus = 2 
-    libvirt.cputopology :sockets => '1', :cores => '2', :threads => '1'
+    libvirt.cputopology :sockets => '2', :cores => '2', :threads => '1'
+    libvirt.memory = 2048
   end
 end
 
