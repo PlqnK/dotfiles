@@ -52,9 +52,9 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = DejaVu\ Sans:size=10;2
-font-1 = FontAwesome:pixelsize=10;2
-font-2 = siji:pixelsize=10;2
+font-0 = DejaVu Sans:size=10;2
+font-1 = Font Awesome 5 Free:pixelsize=10;2
+font-2 = Wuncon Siji:pixelsize=10;2
 
 modules-left = bspwm i3
 modules-center = mpd
@@ -278,10 +278,10 @@ label = %date% %time%
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL
+label-volume = 
 label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
+label-muted =  muted
 label-muted-foreground = #666
 
 bar-volume-width = 10
