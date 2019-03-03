@@ -2,11 +2,13 @@
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "terminal.integrated.shell.linux": "/usr/bin/fish",
-    "[shellscript]": {
-        "editor.tabSize": 2
-    },
-    "editor.fontFamily": "'Inconsolata','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "workbench.colorTheme": "Solarized Light",
+    "editor.fontFamily": "'Inconsolata', 'Noto Mono', 'Droid Sans Mono', monospace",
     "editor.fontSize": 16,
-    "workbench.colorTheme": "Ayu Mirage",
-    "files.autoGuessEncoding": true
+    "editor.copyWithSyntaxHighlighting": false,
+    "[shellscript]": {
+        "files.encoding": "utf8",
+        "editor.tabSize": 2,
+        "editor.rulers": [120]
+    }
 }
