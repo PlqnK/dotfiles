@@ -1,6 +1,7 @@
 {
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
+    "window.titleBarStyle": "native",
     "terminal.integrated.shell.linux": "/usr/bin/fish",
     "workbench.colorTheme": "Solarized Light",
     "editor.fontFamily": "'Inconsolata', 'Noto Mono', 'Droid Sans Mono', monospace",
