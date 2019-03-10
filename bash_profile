@@ -2,6 +2,6 @@
 # ~/.bash_profile
 #
 
-[[ -f ~/.profile ]] && source ~/.profile
+export SSH_ASKPASS=ksshaskpass
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
