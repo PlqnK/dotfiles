@@ -7,9 +7,10 @@
     "editor.fontFamily": "'Inconsolata', 'Noto Mono', 'Droid Sans Mono', monospace",
     "editor.fontSize": 16,
     "editor.copyWithSyntaxHighlighting": false,
+    "git.autofetch": true,
     "[shellscript]": {
         "files.encoding": "utf8",
         "editor.tabSize": 2,
         "editor.rulers": [120]
-    }
+    },
 }
