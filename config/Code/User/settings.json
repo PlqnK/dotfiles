@@ -2,15 +2,24 @@
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "window.titleBarStyle": "native",
-    "terminal.integrated.shell.linux": "/usr/bin/fish",
     "workbench.colorTheme": "Solarized Light",
     "editor.fontFamily": "'Inconsolata', 'Noto Mono', 'Droid Sans Mono', monospace",
     "editor.fontSize": 16,
     "editor.copyWithSyntaxHighlighting": false,
+    "terminal.integrated.shell.linux": "/usr/bin/fish",
+    "files.insertFinalNewline": true,
     "git.autofetch": false,
     "[shellscript]": {
         "files.encoding": "utf8",
         "editor.tabSize": 2,
         "editor.rulers": [120]
     },
+    "[powershell]": {
+        "files.encoding": "windows1252"
+    },
+    "markdownlint.config": {
+        "MD024": { "siblings_only": true }
+    },
+    "gitlens.defaultDateFormat": "Do MMMM YYYY h:mma",
+    "gitlens.defaultDateShortFormat": "D MMM YYYY"
 }
