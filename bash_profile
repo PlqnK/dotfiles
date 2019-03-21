@@ -3,7 +3,7 @@
 #
 
 export PAGER=less
-export EDITOR="$(if [[ -n $DISPLAY ]]; then echo 'kate'; else echo 'vim'; fi)"
+export EDITOR=vim
 export BROWSER=firefox
 export SSH_ASKPASS=ksshaskpass
 
