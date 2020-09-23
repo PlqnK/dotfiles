@@ -1,0 +1,15 @@
+# -*- shell-script -*-
+# By defaults, xbindkeys does not pay attention with the modifiers
+# NumLock, CapsLock and ScrollLock.
+# Uncomment the lines above if you want to pay attention to them.
+
+#keystate_numlock = enable
+#keystate_capslock = enable
+#keystate_scrolllock= enable
+
+# Switch virtual desktop with mouse
+"xdotool key 'Control_L+Super_L+Left'"
+  b:8
+"xdotool key 'Control_L+Super_L+Right'"
+  b:9
+
