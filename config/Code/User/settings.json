@@ -21,5 +21,8 @@
         "MD024": { "siblings_only": true }
     },
     "gitlens.defaultDateFormat": "Do MMMM YYYY h:mma",
-    "gitlens.defaultDateShortFormat": "D MMM YYYY"
+    "gitlens.defaultDateShortFormat": "D MMM YYYY",
+    "shellcheck.customArgs": [
+        "-x"
+    ]
 }
