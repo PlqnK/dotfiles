@@ -8,4 +8,9 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
+export PAGER=less
+export EDITOR=vim
+export BROWSER=firefox
+export SSH_ASKPASS=ksshaskpass
+
 exec fish
