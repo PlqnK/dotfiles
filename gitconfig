@@ -1,6 +1,6 @@
 [user]
 	name = Victor Bouvier-Deleau
-	email = victor.bouvier-deleau@kolabnow.com
-	signingkey = 001F0B0390FCE724
+	email = victor@bouvier-deleau.fr
+	signingkey = 2266F68D5C1B97EB
 [commit]
 	gpgsign = true
