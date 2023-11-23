@@ -1,9 +1,13 @@
 {
     "telemetry.telemetryLevel": "off",
+{{- if eq .deviceType "laptop" }}
     "window.zoomLevel": 1,
+{{- end }}
     "workbench.colorTheme": "Solarized Light",
     "editor.fontFamily": "Inconsolata, 'Droid Sans Mono', 'monospace', monospace",
+{{- if eq .deviceType "laptop" }}
     "editor.fontSize": 15,
+{{- end }}
     "files.insertFinalNewline": true,
     "editor.copyWithSyntaxHighlighting": false,
     "[shellscript]": {
