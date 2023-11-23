@@ -1,0 +1,22 @@
+{
+    "telemetry.telemetryLevel": "off",
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Solarized Light",
+    "editor.fontFamily": "Inconsolata, 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontSize": 15,
+    "files.insertFinalNewline": true,
+    "editor.copyWithSyntaxHighlighting": false,
+    "[shellscript]": {
+        "files.encoding": "utf8",
+        "editor.tabSize": 2,
+        "editor.rulers": [80, 120]
+    },
+    "[powershell]": {
+        "files.encoding": "windows1252"
+    },
+    "markdownlint.config": {
+        "MD024": { "siblings_only": true }
+    },
+    "gitlens.telemetry.enabled": false,
+    "partialDiff.enableTelemetry": false
+}
