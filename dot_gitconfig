@@ -1,0 +1,8 @@
+[user]
+	name = Victor Bouvier-Deleau
+	email = victor@bouvier-deleau.fr
+	signingkey = E5A57875F1DD825F
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
