@@ -1,2 +1,12 @@
 LICENSE
 README.md
+{{ if ne .chezmoi.osRelease.id "fedora" }}
+.bashrc.d
+.bashrc.d/zsh.bash
+{{ end }}
+{{ if ne .chezmoi.osRelease.id "ubuntu" }}
+.bash_profile
+{{ end }}
+{{ if not (contains "Microsoft" .chezmoi.kernel.osrelease) }}
+run_onchange_sync_code_windows.sh
+{{ end }}
