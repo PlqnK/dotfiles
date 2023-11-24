@@ -1,25 +1,44 @@
 {
     "telemetry.telemetryLevel": "off",
-{{- if eq .deviceType "laptop" }}
+{{- if (and (eq .deviceType "laptop") (eq .environment "home")) }}
     "window.zoomLevel": 1,
 {{- end }}
     "window.titleBarStyle": "custom",
     "window.autoDetectColorScheme": true,
     "workbench.preferredLightColorTheme": "Solarized Light",
     "workbench.preferredDarkColorTheme": "Dark Modern",
-    "editor.fontFamily": "Inconsolata, 'Droid Sans Mono', 'monospace', monospace",
-{{- if eq .deviceType "laptop" }}
+    "editor.fontFamily": "Inconsolata, 'Droid Sans Mono', 'Liberation Mono', Consolas, 'Lucida Console', 'Courier New', monospace",
+{{- if eq .environment "work" }}
+    "editor.fontSize": 16,
+{{- else if (and (eq .deviceType "laptop") (eq .environment "home")) }}
     "editor.fontSize": 15,
 {{- end }}
-    "files.insertFinalNewline": true,
     "editor.copyWithSyntaxHighlighting": false,
+    "editor.accessibilitySupport": "off",
+    "diffEditor.renderSideBySide": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "files.insertFinalNewline": true,
     "[shellscript]": {
         "files.encoding": "utf8",
+        "files.eol": "\n",
         "editor.tabSize": 2,
+        "editor.insertSpaces": true,
         "editor.rulers": [80, 120]
     },
     "[powershell]": {
-        "files.encoding": "windows1252"
+        "files.encoding": "windows1252",
+        "files.eol": "\r\n"
+    },
+    "[vbscript]": {
+        "files.encoding": "windows1252",
+        "files.eol": "\r\n"
+    },
+    "[markdown]": {
+        "editor.wordWrap": "off"
+    },
+    "[yaml]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
     },
     "markdownlint.config": {
         "MD024": { "siblings_only": true }
