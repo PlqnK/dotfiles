@@ -46,15 +46,19 @@ export VISUAL=code
 {{- end }}
 export BROWSER={{ if not (contains "Microsoft" .chezmoi.kernel.osrelease) }}firefox{{ else }}/c/Program\ Files/Firefox\ Developer\ Edition/firefox.exe{{ end }}
 
-{{ if (contains "Microsoft" .chezmoi.kernel.osrelease) -}}
 export LESS="-eirMX"
-export WINHOME=/c/Users/{{ .chezmoi.username }}
+
+{{ if (contains "Microsoft" .chezmoi.kernel.osrelease) -}}
+export PATH=~/.local/bin:$PATH
+
+export GPG_TTY=$(tty)
+#export SSH_AUTH_SOCK=/c/Users/{{ .chezmoi.username }}/AppData/Local/wsl-ssh-agent/ssh-agent.sock
+
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export VBOX_MSI_INSTALL_PATH="/c/Program Files/Oracle/VirtualBox/"
 export VAGRANT_EXPERIMENTAL="disks"
-export GPG_TTY=$(tty)
-#export SSH_AUTH_SOCK=/c/Users/{{ .chezmoi.username }}/AppData/Local/wsl-ssh-agent/ssh-agent.sock
-#export PATH=~/.local/bin:$PATH
+
+export WINHOME=/c/Users/{{ .chezmoi.username }}
 {{- end }}
 
 {{- if eq .chezmoi.osRelease.id "fedora" }}
