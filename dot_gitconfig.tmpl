@@ -26,9 +26,9 @@
 [init]
 	defaultBranch = main
 [pull]
-        ff = only
+	ff = only
 [push]
-        autoSetupRemote = true
+	autoSetupRemote = true
 {{- if (contains "Microsoft" .chezmoi.kernel.osrelease) }}
 [credential]
 	helper = /c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
