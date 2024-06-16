@@ -1,35 +1,35 @@
 [user]
-        name = {{ .fullName | quote }}
-        email = {{ .email | quote }}
+	name = {{ .fullName }}
+	email = {{ .email }}
 {{- if eq .environment "home" }}
-        signingkey = E5A57875F1DD825F
+	signingkey = E5A57875F1DD825F
 {{- end }}
 [color]
-        ui = auto
-        diff = auto
-        status = auto
-        branch = auto
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
 [alias]
-        cl = clone
-        ci = commit
-        co = checkout
-        st = status
-        br = branch -la
-        lo = log --oneline
-        fe = fetch --tags --prune
-        unstage = reset HEAD --
-        last = log -1 HEAD
+	cl = clone
+	ci = commit
+	co = checkout
+	st = status
+	br = branch -la
+	lo = log --oneline
+	fe = fetch --tags --prune
+	unstage = reset HEAD --
+	last = log -1 HEAD
 {{- if eq .environment "home" }}
 [commit]
-        gpgsign = true
+	gpgsign = true
 {{- end }}
 [init]
-        defaultBranch = main
+	defaultBranch = main
 [pull]
         ff = only
 [push]
         autoSetupRemote = true
 {{- if (contains "Microsoft" .chezmoi.kernel.osrelease) }}
 [credential]
-        helper = /c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+	helper = /c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
 {{- end }}
