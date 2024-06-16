@@ -62,7 +62,7 @@ export WINHOME=/c/Users/{{ .chezmoi.username }}
 {{- end }}
 
 {{- if eq .chezmoi.osRelease.id "fedora" }}
-alias code="toolbox run code"
+alias code="/usr/share/code/bin/code --ozone-platform=wayland"
 alias firefox="flatpak-spawn --host --env=TERM=xterm-256color firefox"
 {{- end }}
 
