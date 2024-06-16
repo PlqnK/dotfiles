@@ -8,7 +8,7 @@
     "workbench.preferredLightColorTheme": "Solarized Light",
     "workbench.preferredDarkColorTheme": "Default Dark Modern",
     "editor.fontFamily": "Inconsolata, 'Droid Sans Mono', 'Liberation Mono', Consolas, 'Lucida Console', 'Courier New', monospace",
-{{- if eq .environment "work" }}
+{{- if (or (eq .deviceType "desktop") (eq .environment "work")) }}
     "editor.fontSize": 16,
 {{- else if (and (eq .deviceType "laptop") (eq .environment "home")) }}
     "editor.fontSize": 15,
