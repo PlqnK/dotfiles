@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
 # .config/Code/User/settings.json hash: {{ include "dot_config/private_Code/User/settings.json.tmpl" | sha256sum }}
-cp ~/.config/Code/User/settings.json /c/Users/{{ .chezmoi.username }}/AppData/Roaming/Code/User/settings.json
+if [[ $(grep -i "Microsoft" /proc/sys/kernel/osrelease) ]]; then
+  cp ~/.config/Code/User/settings.json /c/Users/{{ .chezmoi.username }}/AppData/Roaming/Code/User/settings.json
+fi
