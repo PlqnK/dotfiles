@@ -1,5 +1,6 @@
 LICENSE
 README.md
 {{ if not (contains "WSL" .chezmoi.kernel.osrelease) }}
+.config/.gnupg/gpg-agent.conf
 run_onchange_sync_code_windows.sh
 {{ end }}
