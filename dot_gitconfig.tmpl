@@ -1,8 +1,11 @@
-[user]
-	name = {{ .fullName }}
-	email = {{ .email }}
-{{- if eq .environment "home" }}
-	signingkey = E5A57875F1DD825F
+{{- if eq .environment "home" -}}
+[include]
+	path = ~/.config/git/personal
+{{- else if eq .environment "work" -}}
+[includeIf "gitdir:/mnt/c/Users/{{ .chezmoi.username }}/Git/personal/"]
+	path = ~/.config/git/personal
+[includeIf "gitdir:/mnt/c/Users/{{ .chezmoi.username }}/Git/work/"]
+	path = ~/.config/git/work
 {{- end }}
 [color]
 	ui = auto
@@ -19,10 +22,6 @@
 	fe = fetch --tags --prune
 	unstage = reset HEAD --
 	last = log -1 HEAD
-{{- if eq .environment "home" }}
-[commit]
-	gpgsign = true
-{{- end }}
 [init]
 	defaultBranch = main
 [pull]

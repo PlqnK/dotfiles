@@ -1,10 +1,14 @@
-{{- $fullName := promptStringOnce . "fullName" "Full name" -}}
-{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $fullName := promptStringOnce . "fullName" "Personal name" -}}
+{{- $email := promptStringOnce . "email" "Personal email address" -}}
+{{- $workName := promptStringOnce . "workName" "Work name" -}}
+{{- $workEmail := promptStringOnce . "workEmail" "Work email address" -}}
 {{- $deviceType := promptStringOnce . "deviceType" "desktop or laptop" -}}
 {{- $environment := promptStringOnce . "environment" "home or work" -}}
 
 [data]
     fullName = {{ $fullName | quote }}
     email = {{ $email | quote }}
+    workName = {{ $workName | quote }}
+    workEmail = {{ $workEmail | quote }}
     deviceType = {{ $deviceType | quote }}
     environment = {{ $environment | quote }}
