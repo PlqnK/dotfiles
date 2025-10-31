@@ -31,5 +31,5 @@
 	autoSetupRemote = true
 {{- if (contains "WSL" .chezmoi.kernel.osrelease) }}
 [credential]
-	helper = /c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
 {{- end }}
