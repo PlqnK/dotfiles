@@ -29,7 +29,7 @@
 	ff = only
 [push]
 	autoSetupRemote = true
-{{- if (contains "Microsoft" .chezmoi.kernel.osrelease) }}
+{{- if (contains "WSL" .chezmoi.kernel.osrelease) }}
 [credential]
 	helper = /c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
 {{- end }}
