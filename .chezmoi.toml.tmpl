@@ -1,7 +1,7 @@
 {{- $fullName := promptStringOnce . "fullName" "Full name" -}}
 {{- $email := promptStringOnce . "email" "Email address" -}}
-{{- $deviceType := promptStringOnce . "deviceType" "Desktop or Laptop" -}}
-{{- $environment := promptStringOnce . "environment" "Home or work" -}}
+{{- $deviceType := promptStringOnce . "deviceType" "desktop or laptop" -}}
+{{- $environment := promptStringOnce . "environment" "home or work" -}}
 
 [data]
     fullName = {{ $fullName | quote }}
