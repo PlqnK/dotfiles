@@ -75,3 +75,6 @@ export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 alias code="/usr/share/code/bin/code --ozone-platform=wayland"
 alias firefox="flatpak-spawn --host --env=TERM=xterm-256color firefox"
 {{ end -}}
+{{ if (contains "WSL" .chezmoi.kernel.osrelease) -}}
+alias podman="podman-remote"
+{{ end -}}
