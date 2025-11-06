@@ -2,6 +2,8 @@
 [include]
 	path = ~/.config/git/personal
 {{- else if eq .environment "work" -}}
+[includeIf "gitdir:/home/{{ .chezmoi.username }}/.local/share/chezmoi/"]
+	path = ~/.config/git/personal
 [includeIf "gitdir:/home/{{ .chezmoi.username }}/git/personal/"]
 	path = ~/.config/git/personal
 [includeIf "gitdir:/mnt/c/Users/{{ .chezmoi.username }}/Git/personal/"]
