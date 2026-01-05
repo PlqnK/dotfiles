@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+if [[ ! "${1}" =~ ^(desktop|tv)$ ]]; then
+  echo "Error: first and only argument should be 'desktop' or 'tv'." >&2
+  exit 1
+fi
+
+if [[ "${1}" == "desktop" ]]; then
+  echo "Switching to desktop mode."
+  gdctl set --logical-monitor --primary --monitor DP-1 --mode 2560x1440@165.080 --logical-monitor --monitor DP-2 --mode 2560x1440@165.080 --left-of DP-1
+  gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+  pactl set-default-sink alsa_output.pci-0000_0c_00.4.iec958-stereo
+  gtk-launch com.valvesoftware.Steam steam://close/bigpicture
+elif [[ "${1}" == "tv" ]]; then
+  echo "Switching to tv mode."
+  gdctl set --logical-monitor --primary --monitor HDMI-1 --mode 1920x1080@60.000
+  gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false
+  iteration=0
+  while ! pactl list sinks | grep -q 'alsa_output.pci-0000_0a_00.1.hdmi-stereo$' && (( iteration < 100 )); do
+    sleep 0.1
+    iteration=$(( iteration + 1 ))
+  done
+  pactl set-default-sink alsa_output.pci-0000_0a_00.1.hdmi-stereo
+  gtk-launch com.valvesoftware.Steam steam://open/bigpicture
+fi
