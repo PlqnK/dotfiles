@@ -8,10 +8,10 @@
     "workbench.preferredLightColorTheme": "Solarized Light",
     "workbench.preferredDarkColorTheme": "Default Dark Modern",
     "editor.fontFamily": "Inconsolata, 'Droid Sans Mono', 'Liberation Mono', Consolas, 'Lucida Console', 'Courier New', monospace",
-{{- if (or (eq .deviceType "desktop") (eq .environment "work")) }}
+{{- if (eq .deviceType "desktop") }}
+    "editor.fontSize": 20,
+{{- else if (eq .deviceType "laptop") }}
     "editor.fontSize": 16,
-{{- else if (and (eq .deviceType "laptop") (eq .environment "home")) }}
-    "editor.fontSize": 15,
 {{- end }}
     "editor.copyWithSyntaxHighlighting": false,
     "editor.accessibilitySupport": "off",
