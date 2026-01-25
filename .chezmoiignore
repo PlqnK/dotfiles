@@ -1,5 +1,8 @@
 LICENSE
 README.md
+{{ if not (and (eq .environment "home") (eq .deviceType "desktop")) }}
+.config/environment.d/firefox.conf
+{{ end }}
 {{ if not (contains "WSL" .chezmoi.kernel.osrelease) }}
 .config/.gnupg/gpg-agent.conf
 run_onchange_sync_code_windows.sh
