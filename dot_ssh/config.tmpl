@@ -1,0 +1,5 @@
+{{- if eq .environment "home" -}}
+Host *
+	IdentityAgent ~/.1password/agent.sock
+{{- else if eq .environment "work" -}}
+{{- end }}
