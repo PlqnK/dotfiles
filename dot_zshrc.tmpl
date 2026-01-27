@@ -63,14 +63,11 @@ export EDITOR=vim
 export PAGER=less
 export BROWSER={{ if not (contains "WSL" .chezmoi.kernel.osrelease) }}firefox{{ else }}/c/Program\ Files/Firefox\ Developer\ Edition/firefox.exe{{ end }}
 
-{{- if (contains "WSL" .chezmoi.kernel.osrelease) }}
+{{ if (contains "WSL" .chezmoi.kernel.osrelease) -}}
 export WINHOME=/mnt/c/Users/{{ .chezmoi.username }}
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 {{ end -}}
 
-{{ if not (contains "WSL" .chezmoi.kernel.osrelease) -}}
-alias code="/usr/share/code/bin/code --ozone-platform=wayland"
-{{ end -}}
 {{ if (contains "WSL" .chezmoi.kernel.osrelease) -}}
 alias podman="podman-remote"
 {{ end -}}
