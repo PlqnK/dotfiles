@@ -6,5 +6,6 @@ README.md
 {{ end }}
 {{ if not (contains "WSL" .chezmoi.kernel.osrelease) }}
 .config/.gnupg/gpg-agent.conf
+.ssh/aws-ssm-ssh-proxy-command.sh
 run_onchange_sync_code_windows.sh
 {{ end }}
