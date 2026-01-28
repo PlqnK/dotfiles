@@ -50,12 +50,14 @@ SAVEHIST=1000
 autoload -Uz compinit
 compinit
 
-
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/fzf/shell/key-bindings.zsh
 
 eval "$(starship init zsh)"
+{{ if (contains "WSL" .chezmoi.kernel.osrelease) -}}
+eval $(keychain --eval --quiet ~/.ssh/id_ed25519)
+{{- end }}
 
 ZSH_HIGHLIGHT_STYLES[path]='none'
 
