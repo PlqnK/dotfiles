@@ -8,6 +8,8 @@
 	path = ~/.config/git/personal
 [includeIf "gitdir:/mnt/c/Users/{{ .chezmoi.username }}/Git/personal/"]
 	path = ~/.config/git/personal
+[includeIf "gitdir:/mnt/c/Users/{{ .chezmoi.username }}/OneDrive - {{ .workOneDriveName }}/Documents/WindowsPowerShell/"]
+	path = ~/.config/git/personal
 [includeIf "gitdir:/home/{{ .chezmoi.username }}/git/work/"]
 	path = ~/.config/git/work
 [includeIf "gitdir:/mnt/c/Users/{{ .chezmoi.username }}/Git/work/"]

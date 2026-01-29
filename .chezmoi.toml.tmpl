@@ -2,6 +2,7 @@
 {{- $email := promptStringOnce . "email" "Personal email address" -}}
 {{- $workName := promptStringOnce . "workName" "Work name" -}}
 {{- $workEmail := promptStringOnce . "workEmail" "Work email address" -}}
+{{- $workOneDriveName := promptStringOnce . "workOneDriveName" "Work OneDrive name" -}}
 {{- $deviceType := promptStringOnce . "deviceType" "desktop or laptop" -}}
 {{- $environment := promptStringOnce . "environment" "home or work" -}}
 
@@ -10,5 +11,6 @@
     email = {{ $email | quote }}
     workName = {{ $workName | quote }}
     workEmail = {{ $workEmail | quote }}
+    workOneDriveName = {{ $workOneDriveName | quote }}
     deviceType = {{ $deviceType | quote }}
     environment = {{ $environment | quote }}
