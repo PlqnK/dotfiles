@@ -1,6 +1,6 @@
 {
     "telemetry.telemetryLevel": "off",
-{{- if (and (eq .deviceType "laptop") (eq .environment "home")) }}
+{{- if (eq .environment "home") }}
     "window.zoomLevel": 1,
 {{- end }}
     "window.titleBarStyle": "custom",
@@ -9,7 +9,7 @@
     "workbench.preferredDarkColorTheme": "Default Dark Modern",
     "editor.fontFamily": "Inconsolata, 'Droid Sans Mono', 'Liberation Mono', Consolas, 'Lucida Console', 'Courier New', monospace",
 {{- if (eq .deviceType "desktop") }}
-    "editor.fontSize": 20,
+    "editor.fontSize": 18,
 {{- else if (eq .deviceType "laptop") }}
     "editor.fontSize": 16,
 {{- end }}
