@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# .config/systemd/user/toolbox-autoupdate.timer hash: {{ include "dot_config/systemd/user/toolbox-autoupdate.timer" | sha256sum }}
+if [[ ! $(grep -i "WSL" /proc/sys/kernel/osrelease) ]]; then
+  systemctl --user daemon-reload
+  systemctl --user enable toolbox-autoupdate.timer
+fi

@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FEDORA_VERSION=43
+CONTAINER_IMAGE="ghcr.io/shellt0pia/fedora-toolbox:${FEDORA_VERSION}"
+CONTAINER_NAME="fedora-toolbox-${FEDORA_VERSION}"
+
+metered_network_connection() {
+  local status
+  status=$(/usr/bin/busctl get-property --json=short org.freedesktop.NetworkManager /org/freedesktop/NetworkManager org.freedesktop.NetworkManager Metered | /usr/bin/jq .data)
+  # https://networkmanager.dev/docs/api/latest/nm-dbus-types.html#NMMetered
+  case ${status} in
+    1|3) return 0 ;;
+    2|4) return 1 ;;
+    0|*) return 1 ;;
+  esac
+}
+
+container_exists() {
+  /usr/bin/podman container exists "${CONTAINER_NAME}"
+}
+
+container_running() {
+  [[ "$(/usr/bin/podman inspect -f '{{.State.Running}}' "${CONTAINER_NAME}" 2>/dev/null || echo false)" == "true" ]]
+}
+
+container_process_count() {
+  local count
+  count=$(/usr/bin/pgrep --cgroup "$(/usr/bin/systemctl --user show --property ControlGroup --value "libpod-$(/usr/bin/podman inspect --format '{{.Id}}' ${CONTAINER_NAME}).scope")/container" | wc -l)
+  echo "${count:-0}"
+}
+
+local_image_digest() {
+  /usr/bin/podman image inspect --format '{{.Digest}}' "${CONTAINER_IMAGE}" 2>/dev/null || true
+}
+
+remote_image_digest() {
+  /usr/bin/skopeo inspect --format '{{.Digest}}' "docker://${CONTAINER_IMAGE}" 2>/dev/null || true
+}
+
+stop_and_remove_toolbox() {
+  if container_running; then
+    echo "Stopping running toolbox: ${CONTAINER_NAME}"
+    /usr/bin/toolbox stop "${CONTAINER_NAME}" || true
+  fi
+  echo "Removing toolbox: ${CONTAINER_NAME}"
+  /usr/bin/toolbox rm -f "${CONTAINER_NAME}" || true
+}
+
+create_toolbox() {
+  echo "Pulling new image from registry: '${CONTAINER_IMAGE}'"
+  /usr/bin/podman pull "${CONTAINER_IMAGE}"
+  echo "Creating toolbox container '${CONTAINER_NAME}' from image '${CONTAINER_IMAGE}'"
+  /usr/bin/toolbox create --assumeyes --image "${CONTAINER_IMAGE}" --container "${CONTAINER_NAME}"
+  echo "Container '${CONTAINER_NAME}' created. It will be used on next 'toolbox enter'."
+}
+
+main() {
+  echo "-- Toolbox auto-update started for container '${CONTAINER_NAME}' using image '${CONTAINER_IMAGE}'"
+
+  if metered_network_connection; then
+    echo "Detected metered network connection. Skipping update."
+    exit 0
+  fi
+
+  if container_exists; then
+    local local_digest remote_digest
+    local_digest="$(local_image_digest || true)"
+    remote_digest="$(remote_image_digest || true)"
+
+    if [[ -n "${local_digest}" && -n "${remote_digest}" && "${local_digest}" == "${remote_digest}" ]]; then
+      echo "Image is already up-to-date (digest: ${remote_digest}). Nothing to do."
+      exit 0
+    fi
+
+    if [[ -z "${remote_digest}" ]]; then
+      echo "Could not determine new image digest; proceeding cautiously."
+    else
+      echo "New image digest detected: ${remote_digest} (previous: ${local_digest:-none})."
+    fi
+
+    if container_running; then
+      local processes
+      processes="$(container_process_count || echo 2)" # be conservative if check fails
+      if [[ "${processes}" -gt 1 ]]; then
+        echo "Toolbox is actively used. Skipping update."
+        exit 0
+      else
+        echo "Toolbox is idle. Proceeding to stop & update."
+        stop_and_remove_toolbox
+        create_toolbox
+      fi
+    else
+      echo "Container exists but is not running. Recreating toolbox with the new image."
+      stop_and_remove_toolbox
+      create_toolbox
+    fi
+  else
+    echo "Container does not exist. Creating toolbox from the image."
+    create_toolbox
+  fi
+
+  echo "Pruning dangling images."
+  /usr/bin/podman image prune -f >/dev/null 2>&1 || true
+
+  echo "-- Toolbox auto-update finished"
+}
+
+main "$@"
