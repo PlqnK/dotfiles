@@ -6,4 +6,4 @@ This repository contains my personal configuration files managed using [chezmoi]
 
 ## License
 
-This repository is available under the [Unlicense](https://unlicense.org/). A copy of the license is available in this project folder.
+This repository is available under the [3-Clause BSD License](https://opensource.org/license/bsd-3-clause). A copy of the license is available in this project folder.
