@@ -4,8 +4,11 @@ README.md
 .config/environment.d
 .local/bin
 {{ end }}
+{{ if (contains "WSL" .chezmoi.kernel.osrelease) }}
+.chezmoiscripts/native
+{{ end }}
 {{ if not (contains "WSL" .chezmoi.kernel.osrelease) }}
+.chezmoiscripts/wsl
 .config/.gnupg/gpg-agent.conf
 .ssh/aws-ssm-ssh-proxy-command.sh
-run_onchange_sync_code_windows.sh
 {{ end }}
