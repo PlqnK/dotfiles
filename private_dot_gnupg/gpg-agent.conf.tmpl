@@ -1,5 +1,5 @@
-{{ if (contains "WSL" .chezmoi.kernel.osrelease) -}}
+{{- if (contains "WSL" .chezmoi.kernel.osrelease) }}
 pinentry-program "/mnt/c/Program Files/GnuPG/bin/pinentry-basic.exe"
-{{ else -}}
+{{- else }}
 pinentry-program /usr/bin/pinentry-gnome3
-{{ end -}}
+{{- end }}
