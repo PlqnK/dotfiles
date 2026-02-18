@@ -2,13 +2,16 @@ LICENSE
 README.md
 {{ if not (and (eq .environment "home") (eq .deviceType "desktop")) }}
 .config/environment.d
-.local/bin
-{{ end }}
-{{ if (contains "WSL" .chezmoi.kernel.osrelease) }}
-.chezmoiscripts/native
+.local/bin/gnome-switch-layout
 {{ end }}
 {{ if not (contains "WSL" .chezmoi.kernel.osrelease) }}
-.chezmoiscripts/wsl
+.chezmoiscripts/wsl/**
 .config/.gnupg/gpg-agent.conf
 .ssh/aws-ssm-ssh-proxy-command.sh
+{{ end }}
+{{ if (contains "WSL" .chezmoi.kernel.osrelease) }}
+.chezmoiscripts/native/**
+.config/systemd/user/toolbox*
+.local/bin/gnome*
+.local/bin/toolbox*
 {{ end }}
