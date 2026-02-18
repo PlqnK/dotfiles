@@ -22,7 +22,7 @@
 	path = ~/.config/git/work
 {{- end }}
 {{- end }}
-{{- if (and (eq .chezmoi.os "linux") (contains "WSL" .chezmoi.kernel.osrelease)) }}
+{{- if (and (eq .chezmoi.os "linux") (contains "WSL" .chezmoi.kernel.osrelease)) -}}
 [credential]
 	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
 {{- end }}
