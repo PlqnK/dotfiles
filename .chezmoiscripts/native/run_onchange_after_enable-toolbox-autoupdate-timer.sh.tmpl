@@ -1,7 +1,23 @@
 #!/usr/bin/env bash
-
+# .config/systemd/user/toolbox-autoupdate.service hash: {{ include "dot_config/systemd/user/toolbox-autoupdate.service" | sha256sum }}
 # .config/systemd/user/toolbox-autoupdate.timer hash: {{ include "dot_config/systemd/user/toolbox-autoupdate.timer" | sha256sum }}
-if [[ ! $(grep -i "WSL" /proc/sys/kernel/osrelease) ]]; then
-  systemctl --user daemon-reload
-  systemctl --user enable toolbox-autoupdate.timer
+
+if [[ ! -f /run/.toolboxenv ]]; then
+  exit 0
 fi
+
+systemctl --user daemon-reload
+case $(/usr/bin/systemctl --user is-enabled toolbox-autoupdate.timer) in
+  enabled*)
+    : ;;
+  disabled)
+    /usr/bin/systemctl --user enable toolbox-autoupdate.timer ;;
+  masked*)
+    echo "toolbox-autoupdate.timer is masked, not enabling." >&2 ;;
+  bad)
+    echo "toolbox-autoupdate.timer is invalid, not enabling." >&2 ;;
+  not-found)
+    echo "toolbox-autoupdate.timer not found." >&2 ;;
+  *)
+    echo "Error occured while running /usr/bin/systemctl --user is-enabled toolbox-autoupdate.timer." >&2 ;;
+esac
