@@ -2,10 +2,10 @@
 
 add_newline = false
 
-right_format = """$time"""
-
-[time]
-disabled = false
+[directory]
+truncation_length = 10
+truncate_to_repo = false
+fish_style_pwd_dir_length = 1
 
 [container]
-disabled = true
+disabled = false
