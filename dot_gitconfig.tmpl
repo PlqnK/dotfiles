@@ -2,18 +2,40 @@
 [include]
 	path = ~/.config/git/personal
 {{- else if eq .environment "work" -}}
+{{- if (and (eq .chezmoi.os "linux") (contains "WSL" .chezmoi.kernel.osrelease)) }}
 [includeIf "gitdir:/home/{{ .chezmoi.username }}/.local/share/chezmoi/"]
 	path = ~/.config/git/personal
 [includeIf "gitdir:/home/{{ .chezmoi.username }}/git/personal/"]
 	path = ~/.config/git/personal
-[includeIf "gitdir:/mnt/c/Users/{{ .chezmoi.username }}/Git/personal/"]
-	path = ~/.config/git/personal
-[includeIf "gitdir:/mnt/c/Users/{{ .chezmoi.username }}/OneDrive - {{ .workOneDriveName }}/Documents/WindowsPowerShell/"]
-	path = ~/.config/git/personal
 [includeIf "gitdir:/home/{{ .chezmoi.username }}/git/work/"]
 	path = ~/.config/git/work
+[includeIf "gitdir:/mnt/c/Users/{{ .chezmoi.username }}/OneDrive - {{ .workOneDriveName }}/Documents/PowerShell/"]
+	path = ~/.config/git/personal
 [includeIf "gitdir:/mnt/c/Users/{{ .chezmoi.username }}/Git/work/"]
 	path = ~/.config/git/work
+{{- else if eq .chezmoi.os "windows" }}
+[includeIf "gitdir:/c/Users/{{ .chezmoi.username }}/.local/share/chezmoi/"]
+	path = ~/.config/git/personal
+[includeIf "gitdir:/c/Users/{{ .chezmoi.username }}/OneDrive - {{ .workOneDriveName }}/Documents/PowerShell/"]
+	path = ~/.config/git/personal
+[includeIf "gitdir:/c/Users/{{ .chezmoi.username }}/Git/work/"]
+	path = ~/.config/git/work
+{{- end }}
+{{- end }}
+{{- if eq .chezmoi.os "windows" }}
+[diff "astextplain"]
+	textconv = astextplain
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[http]
+    sslBackend = schannel
+[core]
+	autocrlf = input
+	fsmonitor = true
+	symlinks = false
 {{- end }}
 [color]
 	ui = auto
@@ -36,7 +58,7 @@
 	ff = only
 [push]
 	autoSetupRemote = true
-{{- if (contains "WSL" .chezmoi.kernel.osrelease) }}
+{{- if (and (eq .chezmoi.os "linux") (contains "WSL" .chezmoi.kernel.osrelease)) }}
 [credential]
 	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
 {{- end }}

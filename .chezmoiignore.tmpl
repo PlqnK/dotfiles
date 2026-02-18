@@ -1,5 +1,11 @@
 LICENSE
 README.md
+
+{{ if eq .chezmoi.os "linux" }}
+AppData
+AppData/**
+OneDrive - VINCI Energies
+OneDrive - VINCI Energies/**
 {{ if not (and (eq .environment "home") (eq .deviceType "desktop")) }}
 .config/environment.d
 .local/bin/gnome-switch-layout
@@ -14,4 +20,24 @@ README.md
 .config/systemd/user/toolbox*
 .local/bin/gnome*
 .local/bin/toolbox*
+{{ end }}
+{{ else }}
+.chezmoiscripts/linux/**
+.chezmoiscripts/wsl/**
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+.bashrc.d
+.bashrc.d/**
+.config
+.config/**
+.gnupg
+.gnupg/**
+.local
+.local/**
+.ssh
+.ssh/**
+.zshrc
+{{ else }}
+.chezmoiscripts/windows/**
 {{ end }}
