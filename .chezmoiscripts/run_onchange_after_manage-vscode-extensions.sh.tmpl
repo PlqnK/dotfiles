@@ -1,0 +1,35 @@
+{{ if eq .chezmoi.os "linux" -}}
+
+{{ $installExtensions := list
+     "davidanson.vscode-markdownlint"
+     "eamodio.gitlens"
+     "editorconfig.editorconfig"
+     "foxundermoon.shell-format"
+     "github.vscode-github-actions"
+     "hashicorp.terraform"
+     "redhat.ansible"
+     "redhat.vscode-xml"
+     "redhat.vscode-yaml"
+     "ryu1kn.partial-diff"
+     "samuelcolvin.jinjahtml"
+     "tamasfe.even-better-toml"
+     "redhat.vscode-yaml" -}}
+
+{{ $uninstallExtensions := list
+     "shardulm94.trailing-spaces" -}}
+
+#!/usr/bin/env bash
+
+set -eufo pipefail
+
+installed_extensions=$(code --list-extensions)
+
+{{ range $installExtensions -}}
+echo "${installed_extensions}" | grep -q "{{ . }}" || code --force --install-extension {{ . }}
+{{ end -}}
+
+{{ range $uninstallExtensions -}}
+echo "${installed_extensions}" | grep -q "{{ . }}" && code --force --uninstall-extension {{ . }}
+{{ end -}}
+
+{{ end -}}
