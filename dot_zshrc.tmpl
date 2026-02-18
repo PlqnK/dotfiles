@@ -67,6 +67,7 @@ export BROWSER={{ if not (contains "WSL" .chezmoi.kernel.osrelease) }}firefox{{ 
 
 {{ if (contains "WSL" .chezmoi.kernel.osrelease) -}}
 export WINHOME=/mnt/c/Users/{{ .chezmoi.username }}
+export NODE_EXTRA_CA_CERTS=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 export SSL_CERT_FILE=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 {{ end -}}
