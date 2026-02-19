@@ -7,5 +7,7 @@ truncation_length = 10
 truncate_to_repo = false
 fish_style_pwd_dir_length = 1
 
+{{ if stat "/run/.toolboxenv" -}}
 [container]
-disabled = false
+disabled = true
+{{ end -}}
