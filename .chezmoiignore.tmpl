@@ -11,12 +11,12 @@ OneDrive - VINCI Energies/**
 .local/bin/gnome-switch-layout
 {{ end }}
 {{ if not (contains "WSL" .chezmoi.kernel.osrelease) }}
-.chezmoiscripts/wsl/**
+.chezmoiscripts/linux/wsl/**
 .config/.gnupg/gpg-agent.conf
 .ssh/aws-ssm-ssh-proxy-command.sh
 {{ end }}
 {{ if (contains "WSL" .chezmoi.kernel.osrelease) }}
-.chezmoiscripts/linux/**
+.chezmoiscripts/linux/native/**
 .config/systemd/user/toolbox*
 .local/bin/gnome*
 .local/bin/toolbox*
@@ -25,7 +25,6 @@ OneDrive - VINCI Energies/**
 {{ end }}
 {{ else }}
 .chezmoiscripts/linux/**
-.chezmoiscripts/wsl/**
 {{ end }}
 
 {{ if eq .chezmoi.os "windows" }}

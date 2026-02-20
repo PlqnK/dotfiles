@@ -21,3 +21,5 @@ case $(systemctl --user is-enabled toolbox-autoupdate.timer) in
   *)
     echo "Error occured while running systemctl --user is-enabled toolbox-autoupdate.timer." >&2 ;;
 esac
+
+exit 0

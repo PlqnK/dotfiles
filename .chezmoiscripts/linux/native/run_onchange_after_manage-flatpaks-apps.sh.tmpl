@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{{ $fedoraApps := list
+  "ca.desrt.dconf-editor"
+  "org.fedoraproject.MediaWriter"
+  "org.gnome.Calculator"
+  "org.gnome.Calendar"
+  "org.gnome.Characters"
+  "org.gnome.Connections"
+  "org.gnome.Contacts"
+  "org.gnome.Decibels"
+  "org.gnome.Evince"
+  "org.gnome.Extensions"
+  "org.gnome.FileRoller"
+  "org.gnome.Logs"
+  "org.gnome.Maps"
+  "org.gnome.NautilusPreviewer"
+  "org.gnome.Papers"
+  "org.gnome.Showtime"
+  "org.gnome.TextEditor"
+  "org.gnome.Weather"
+  "org.gnome.baobab"
+  "org.gnome.clocks"
+  "org.gnome.eog"
+  "org.gnome.font-viewer" -}}
+{{ $flathubApps := list
+  "app.drey.KeyRack"
+  "com.belmoussaoui.Obfuscate"
+  "com.discordapp.Discord"
+  "com.github.ADBeveridge.Raider"
+  "com.github.jeromerobert.pdfarranger"
+  "com.github.johnfactotum.Foliate"
+  "com.github.tchx84.Flatseal"
+  "com.mattjakeman.ExtensionManager"
+  "com.mikrotik.WinBox"
+  "com.nextcloud.desktopclient.nextcloud"
+  "com.spotify.Client"
+  "com.steamgriddb.steam-rom-manager"
+  "com.usebottles.bottles"
+  "com.valvesoftware.Steam"
+  "de.haeckerfelix.Fragments"
+  "fr.free.Homebank"
+  "io.github.flattool.Ignition"
+  "io.github.limo_app.limo"
+  "io.github.mpobaschnig.Vaults"
+  "io.github.realmazharhussain.GdmSettings"
+  "io.github.seadve.Kooha"
+  "io.github.TransmissionRemoteGtk"
+  "io.missioncenter.MissionCenter"
+  "md.obsidian.Obsidian"
+  "net.lutris.Lutris"
+  "net.pcsx2.PCSX2"
+  "org.chromium.Chromium"
+  "org.gimp.GIMP"
+  "org.gnome.Firmware"
+  "org.gnome.seahorse.Application"
+  "org.inkscape.Inkscape"
+  "org.libreoffice.LibreOffice"
+  "org.mozilla.Thunderbird"
+  "org.telegram.desktop" -}}
+
+fedora_apps=(
+{{- range $fedoraApps }}
+  "{{ . }}"
+{{- end }}
+)
+flathub_apps=(
+{{- range $flathubApps }}
+  "{{ . }}"
+{{- end }}
+)
+installed_apps=$(flatpak list --app --columns=application)
+
+to_install_fedora=($(grep -Fvx -f <(echo "$installed_apps") <(printf "%s\n" "${fedora_apps[@]}") || true))
+to_install_flathub=($(grep -Fvx -f <(echo "$installed_apps") <(printf "%s\n" "${flathub_apps[@]}") || true))
+
+all_wanted=$(printf "%s\n" "${fedora_apps[@]}" "${flathub_apps[@]}")
+to_uninstall=($(grep -Fvx -f <(echo "$all_wanted") <(echo "$installed_apps") || true))
+
+if [[ -z "${to_install_fedora[*]}" && -z "${to_install_flathub[*]}" && -z "${to_uninstall[*]}" ]]; then
+  exit 0
+fi
+
+[[ -n "${to_install_fedora[*]}" ]] && { printf "[flatpak] Install (Fedora):\n"; printf -- "- %s\n" "${to_install_fedora[@]}"; }
+[[ -n "${to_install_flathub[*]}" ]] && { printf "[flatpak] Install (Flathub):\n"; printf -- "- %s\n" "${to_install_flathub[@]}"; }
+[[ -n "${to_uninstall[*]}" ]] && { printf "[flatpak] Uninstall:\n"; printf -- "- %s\n" "${to_uninstall[@]}"; }
+
+read -p "Apply changes? [y/N] " answer
+[[ "${answer,,}" != "y" ]] && exit 1
+
+[[ -n "${to_install_fedora[*]}" ]] && flatpak install -y --noninteractive fedora "${to_install_fedora[@]}"
+[[ -n "${to_install_flathub[*]}" ]] && flatpak install -y --noninteractive flathub "${to_install_flathub[@]}"
+[[ -n "${to_uninstall[*]}" ]] && flatpak uninstall -y --noninteractive "${to_uninstall[@]}"
+
+exit 0

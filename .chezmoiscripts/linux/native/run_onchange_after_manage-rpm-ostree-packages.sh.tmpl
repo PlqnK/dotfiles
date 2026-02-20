@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{{ $packages := list
+  "1password"
+  "1password-cli"
+  "android-tools"
+  "pam-u2f"
+  "pamu2fcfg"
+  "rpmfusion-free-release"
+  "rpmfusion-nonfree-release"
+  "steam-devices" -}}
+
+{{ $desktopPackages := list
+  "akmod-nvidia"
+  "libavcodec-freeworld"
+  "libva-nvidia-driver"
+  "xorg-x11-drv-nvidia-cuda" -}}
+
+{{ $laptopPackages := list
+  "intel-media-driver" -}}
+
+{{ if eq .deviceType "desktop" -}}
+{{ $packages = concat $packages $desktopPackages -}}
+{{ end -}}
+
+{{ if eq .deviceType "laptop" -}}
+{{ $packages := concat $packages $laptopPackages -}}
+{{ end -}}
+
+packages=(
+{{- range $packages }}
+  "{{ . }}"
+{{- end }}
+)
+installed_packages=$(jq -r '.[]' <<< $(rpm-ostree status --jsonpath="$.deployments[0].requested-packages[*]" 2>/dev/null))
+
+to_install=($(grep -Fvx -f <(echo "$installed_packages") <(printf "%s\n" "${packages[@]}") || true))
+to_uninstall=($(grep -Fvx -f <(printf "%s\n" "${packages[@]}") <(echo "$installed_packages") || true))
+
+if [[ -z "${to_install[*]}" && -z "${to_uninstall[*]}" ]]; then
+  exit 0
+fi
+
+[[ -n "${to_install[*]}" ]] && { printf "[rpm-ostree] Install:\n"; printf -- "- %s\n" "${to_install[@]}"; }
+[[ -n "${to_uninstall[*]}" ]] && { printf "[rpm-ostree] Uninstall:\n"; printf -- "- %s\n" "${to_uninstall[@]}"; }
+
+read -p "Apply changes? [y/N] " answer
+[[ "${answer,,}" != "y" ]] && exit 1
+
+[[ ${#to_install[@]} -gt 0 && ${#to_uninstall[@]} -gt 0 ]] && rpm-ostree install -y "${to_install[@]}" "${to_uninstall[@]/#/--uninstall=}"
+[[ ${#to_install[@]} -gt 0 && ${#to_uninstall[@]} -eq 0 ]] && rpm-ostree install -y "${to_install[@]}"
+[[ ${#to_uninstall[@]} -gt 0 && ${#to_install[@]} -eq 0 ]] && rpm-ostree uninstall -y "${to_uninstall[@]}"
+
+exit 0

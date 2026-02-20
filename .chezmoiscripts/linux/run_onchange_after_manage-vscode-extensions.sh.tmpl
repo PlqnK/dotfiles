@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{{ $extensions := list
+  "davidanson.vscode-markdownlint"
+  "eamodio.gitlens"
+  "editorconfig.editorconfig"
+  "foxundermoon.shell-format"
+  "google.selinux-policy-languages"
+  "hangxingliu.vscode-systemd-support"
+  "hashicorp.terraform"
+  "mikestead.dotenv"
+  "ms-python.python"
+  "redhat.ansible"
+  "redhat.vscode-xml"
+  "redhat.vscode-yaml"
+  "ryu1kn.partial-diff"
+  "samuelcolvin.jinjahtml"
+  "tamasfe.even-better-toml" -}}
+
+{{ $personalExtensions := list
+  "github.vscode-github-actions"
+  "ms-vscode.makefile-tools" -}}
+
+{{ $workExtensions := list
+  "gitlab.gitlab-workflow" -}}
+
+{{ if eq .environment "home" -}}
+{{ $extensions = concat $extensions $personalExtensions -}}
+{{ end -}}
+
+{{ if eq .environment "work" -}}
+{{ $extensions = concat $extensions $workExtensions -}}
+{{ end -}}
+
+extensions=(
+{{- range $extensions }}
+  "{{ . }}"
+{{- end }}
+)
+installed_extensions=$(code --list-extensions)
+
+to_install=($(grep -Fvx -f <(echo "$installed_extensions") <(printf "%s\n" "${extensions[@]}") || true))
+to_uninstall=($(grep -Fvx -f <(printf "%s\n" "${extensions[@]}") <(echo "$installed_extensions") || true))
+
+if [[ -z "${to_install[*]}" && -z "${to_uninstall[*]}" ]]; then
+  exit 0
+fi
+
+[[ -n "${to_install[*]}" ]] && { printf "[vscode] Install:\n"; printf -- "- %s\n" "${to_install[@]}"; }
+[[ -n "${to_uninstall[*]}" ]] && { printf "[vscode] Uninstall:\n"; printf -- "- %s\n"  "${to_uninstall[@]}"; }
+
+read -p "Apply changes? [y/N] " answer
+[[ "${answer,,}" != "y" ]] && exit 1
+
+[[ -n "${to_install[*]}" ]] && for extension in "${to_install[@]}"; do code --force --install-extension "${extension}"; done
+[[ -n "${to_uninstall[*]}" ]] && for extension in "${to_uninstall[@]}"; do code --force --uninstall-extension "${extension}"; done
+
+exit 0
