@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-FEDORA_VERSION=43
+FEDORA_VERSION=44
 CONTAINER_IMAGE="ghcr.io/shellt0pia/fedora-toolbox:${FEDORA_VERSION}"
 CONTAINER_NAME="fedora-toolbox-${FEDORA_VERSION}"
 
